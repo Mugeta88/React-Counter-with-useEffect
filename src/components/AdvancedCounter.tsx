@@ -5,6 +5,7 @@ function AdvancedCounter() {
     const [history, setHistory] = useState<number[]>([0])
     const [step, setStep] = useState<number>(1);
 
+
     useEffect(() => {
         setHistory((prevHistory) => [...prevHistory, count]);
     }, [count]);
@@ -15,8 +16,25 @@ function AdvancedCounter() {
       <h1>Advanced Counter</h1>
       <h2>Current Count: {count}</h2>
 
-      <button onClick={() => setCount(prev => prev - 1)}>Decrement</button>
-      <button onClick={() => setCount(prev => prev + 1)}>Increment</button>
+    <button onClick={() => setCount(prev => prev - step)}>
+        Decrement
+    </button>
+
+    <button onClick={() => setCount(prev => prev + step)}>
+        Increment
+    </button>
+
+
+    <label>
+        Step Value:
+        <input
+            type="number"
+            value={step}
+            onChange={(e) => setStep(Number(e.target.value) || 1)}
+        />
+    </label>
+
+
 
 
     <h3>Count History:</h3>
