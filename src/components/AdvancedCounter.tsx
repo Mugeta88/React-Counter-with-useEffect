@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function AdvancedCounter() {
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState<number>(0)
+
+    const [history, setHistory] = useState<number[]>([0])
+
+    useEffect(() => {
+        setHistory((prevHistory) => [...prevHistory, count]);
+    }, [count]);
+
 
   return (
     <div>
@@ -9,6 +16,8 @@ function AdvancedCounter() {
 
       <button onClick={() => setCount(prev => prev - 1)}>Decrement</button>
       <button onClick={() => setCount(prev => prev + 1)}>Increment</button>
+
+      
     </div>
   );
 }
