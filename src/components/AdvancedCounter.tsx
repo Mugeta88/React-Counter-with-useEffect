@@ -11,6 +11,12 @@ function AdvancedCounter() {
     }, [count]);
 
 
+    const handleReset = (): void => {
+        setCount(0);
+        setHistory([0]);
+    };
+
+
   return (
     <div>
       <h1>Advanced Counter</h1>
@@ -23,6 +29,10 @@ function AdvancedCounter() {
     <button onClick={() => setCount(prev => prev + step)}>
         Increment
     </button>
+
+    <button onClick={handleReset}>Reset</button>
+
+
 
 
     <label>
