@@ -17,6 +17,16 @@ function AdvancedCounter() {
     };
 
 
+    useEffect(() => {
+        const savedCount = localStorage.getItem("counter");
+        if (savedCount !== null) {
+            const parsed = Number(savedCount);
+            setCount(parsed);
+            setHistory([parsed]);
+        }
+    }, []);
+
+
   return (
     <div>
       <h1>Advanced Counter</h1>
