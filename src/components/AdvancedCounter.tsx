@@ -4,7 +4,7 @@ function AdvancedCounter() {
     const [count, setCount] = useState<number>(0)
     const [history, setHistory] = useState<number[]>([0])
     const [step, setStep] = useState<number>(1);
-
+    const [saveMessage, setSaveMessage] = useState<string>("")
 
     useEffect(() => {
         setHistory((prevHistory) => [...prevHistory, count]);
@@ -25,6 +25,20 @@ function AdvancedCounter() {
             setHistory([parsed]);
         }
     }, []);
+
+
+    useEffect(() => {
+        setSaveMessage("Saving...");
+
+        const timeoutId = setTimeout(() => {
+            localStorage.setItem("counter", count.toString());
+            setSaveMessage("Changes saved.");
+        }, 300);
+
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [count])
 
 
   return (
@@ -65,6 +79,7 @@ function AdvancedCounter() {
     </ul>
 
 
+    <p>{saveMessage}</p>
     
       
     </div>
