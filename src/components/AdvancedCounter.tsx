@@ -28,17 +28,35 @@ function AdvancedCounter() {
 
 
     useEffect(() => {
-        setSaveMessage("Saving...");
+        setSaveMessage("Saving...")
 
         const timeoutId = setTimeout(() => {
-            localStorage.setItem("counter", count.toString());
-            setSaveMessage("Changes saved.");
+            localStorage.setItem("counter", count.toString())
+            setSaveMessage("Changes saved.")
         }, 300);
 
         return () => {
-            clearTimeout(timeoutId);
+            clearTimeout(timeoutId)
         };
     }, [count])
+
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "ArrowUp") {
+            setCount(prev => prev + step);
+            }
+            if (event.key === "ArrowDown") {
+            setCount(prev => prev - step);
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [step])
 
 
   return (
@@ -80,6 +98,12 @@ function AdvancedCounter() {
 
 
     <p>{saveMessage}</p>
+
+
+
+    <p>
+        Use ArrowUp to increment and ArrowDown to decrement.
+    </p>
     
       
     </div>
